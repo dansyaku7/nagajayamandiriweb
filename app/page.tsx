@@ -32,7 +32,7 @@ export default function Home() {
   // DATA DUMMY TESTIMONI
   const testimonials = [
     {
-      name: "Dewi Lestari",
+      name: "Dewi Sari",
       role: "Manager, Coffee Shop",
       text: "Hasil neon box-nya sangat rapi dan terang. Pengerjaan on-time sesuai janji. Sukses terus buat NJM!",
     },
@@ -43,7 +43,7 @@ export default function Home() {
     },
     {
       name: "Ahmad Fauzi",
-      role: "Staff, Usaha Mobil",
+      role: "Pekerja, Usaha Mobil",
       text: "Pelayanan sangat responsif. Diskusi desain enak, dan hasil akhirnya presisi banget. Bakal order lagi untuk cabang baru.",
     },
   ];
@@ -342,7 +342,14 @@ export default function Home() {
           aria-label="Hubungi WhatsApp"
           className="flex items-center gap-3 bg-[#25D366] text-white px-5 py-3 md:px-6 md:py-4 rounded-full shadow-2xl hover:bg-[#128C7E] transition-all hover:-translate-y-1 hover:scale-105"
         >
-          <MessageCircle size={28} fill="white" className="text-[#25D366]" />
+          {/* LOGO WA DARI IMAGE FILE */}
+          <Image 
+            src="/images/logowa2.png" 
+            alt="WhatsApp Logo" 
+            width={32} 
+            height={32}
+            className="w-7 h-7 md:w-8 md:h-8 object-contain"
+          />
           <span className="font-bold text-base md:text-lg">Hubungi Sekarang!</span>
         </Link>
 
