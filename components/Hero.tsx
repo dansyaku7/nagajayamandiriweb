@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, ArrowRight } from "lucide-react";
+import { Phone, ArrowRight, Instagram } from "lucide-react";
 import { siteConfig } from "@/config/site";
 
 export default function Hero() {
@@ -43,7 +43,7 @@ export default function Hero() {
                 href={siteConfig.links.whatsapp}
                 className="bg-brand-red text-white px-8 py-4 rounded font-bold text-lg hover:bg-red-700 transition-all flex items-center justify-center gap-2"
              >
-                <Phone size={20} /> Hubungi Kami
+                <Phone size={20} /> Hubungi Sekarang!
              </Link>
 
              <Link
@@ -53,6 +53,32 @@ export default function Hero() {
                 Lihat Portfolio <ArrowRight size={20} />
              </Link>
           </div>
+
+          {/* --- NEW: INSTAGRAM LINK SECTION --- */}
+          <div className="mt-8 flex flex-col md:flex-row items-center justify-center md:justify-start gap-2 text-sm text-slate-300 animate-fade-in">
+            <span>Kunjungi Instagram kami</span>
+            
+            {/* Link Handle IG (Lebih Menonjol) */}
+            <Link 
+              href={siteConfig.links.instagram} 
+              target="_blank"
+              className="flex items-center gap-1.5 font-bold text-white hover:text-brand-red transition-colors"
+            >
+              <Instagram size={18} className="text-brand-red" />
+              @nagajayamandiri
+            </Link>
+            
+            {/* Link Alternatif "Klik Disini" (Lebih Subtle) */}
+            <span className="hidden md:inline text-slate-500">atau</span>
+            <Link 
+              href={siteConfig.links.instagram}
+              target="_blank"
+              className="underline underline-offset-4 decoration-slate-500 hover:text-white hover:decoration-white transition-all"
+            >
+              klik disini
+            </Link>
+          </div>
+
         </div>
       </div>
     </section>

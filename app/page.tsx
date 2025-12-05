@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Hero from "@/components/Hero";
 import { siteConfig } from "@/config/site";
-import { CheckCircle2, MapPin, Instagram, Phone, Lightbulb, Layers, MessageCircle } from "lucide-react";
+import { CheckCircle2, MapPin, Instagram, Phone, Lightbulb, Layers, MessageCircle, ArrowUpRight } from "lucide-react";
 
 export default function Home() {
   const portfolioItems = [
@@ -152,7 +152,8 @@ export default function Home() {
                 Kumpulan hasil karya signage dan reklame yang telah terpasang di berbagai lokasi Jabodetabek.
               </p>
            </div>
-           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+           
+           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8">
               {portfolioItems.map((item, index) => (
                 <div key={index} className="group relative aspect-square overflow-hidden rounded-xl bg-slate-200 cursor-pointer shadow-sm hover:shadow-xl transition-all">
                   <Image
@@ -170,6 +171,25 @@ export default function Home() {
                 </div>
               ))}
            </div>
+
+           {/* --- UPDATED: INSTAGRAM LINK SECTION --- */}
+           <div className="flex justify-center md:justify-end">
+              <div className="inline-flex flex-col md:flex-row items-center gap-2 md:gap-3 bg-white px-6 py-4 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                <span className="text-slate-600 font-medium text-sm md:text-base">
+                  Untuk melihat project kami lainnya ada di Instagram :
+                </span>
+                <Link 
+                  href={siteConfig.links.instagram} 
+                  target="_blank"
+                  className="flex items-center gap-2 text-red-700 font-bold text-sm md:text-base hover:text-red-800 hover:underline"
+                >
+                  <Instagram size={20} />
+                  @nagajayamandiri {/* Ganti text ini sesuai handle IG lo */}
+                  <ArrowUpRight size={16} />
+                </Link>
+              </div>
+           </div>
+
         </div>
       </section>
 
@@ -209,9 +229,22 @@ export default function Home() {
       <footer id="footer" className="bg-white text-slate-600 py-12 md:py-16 border-t border-slate-200">
          <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 border-b border-slate-200 pb-12 mb-12">
             <div className="md:col-span-2">
-               <h3 className="text-slate-900 font-black text-2xl mb-6 tracking-tight">NAGAJAYA<span className="text-red-600">MANDIRI</span></h3>
+               {/* --- UPDATED: LOGO DI FOOTER --- */}
+               <div className="flex items-center gap-3 mb-6">
+                  <Image 
+                    src="/images/logonjm.png" 
+                    alt="Logo Naga Jaya Mandiri" 
+                    width={400} 
+                    height={120}
+                    className="h-14 md:h-25 w-auto object-contain"
+                  />
+                  <h3 className="text-slate-900 font-black text-2xl tracking-tight">
+                    NAGAJAYA<span className="text-red-600">MANDIRI</span>
+                  </h3>
+               </div>
+               
                <p className="mb-6 text-slate-600 max-w-sm leading-relaxed text-sm md:text-base">
-                  Partner terbaik untuk kebutuhan advertising dan signage bisnis Anda. Melayani pembuatan Neon Box, Huruf Timbul, hingga konstruksi Billboard.
+                 Partner terbaik untuk kebutuhan advertising dan signage bisnis Anda. Melayani pembuatan Neon Box, Huruf Timbul, hingga konstruksi Billboard.
                </p>
                <div className="flex gap-4">
                   <Link href={siteConfig.links.instagram} className="bg-slate-100 p-3 rounded-full text-slate-900 hover:bg-red-600 hover:text-white transition-all"><Instagram size={20} /></Link>

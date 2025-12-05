@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X, Phone } from "lucide-react";
 import { siteConfig } from "@/config/site";
 
@@ -11,40 +12,51 @@ export default function Navbar() {
   return (
     <div className="w-full fixed top-0 z-50">
       
-      {/* 1. TOP BAR - MODIFIED: Background Putih, Teks Hitam */}
-      {/* Gue ganti border-slate-800 jadi border-slate-200 biar garis pembatasnya halus di background putih */}
-      <div className="bg-white text-slate-900 text-[10px] md:text-xs py-2 px-4 border-b border-slate-200">
+      {/* 1. TOP BAR - SEKARANG MERAH (Teks Putih) */}
+      {/* Fokus mata langsung ke nomor telepon karena warnanya mencolok */}
+      <div className="bg-red-700 text-white text-[10px] md:text-xs py-2 px-4 shadow-sm z-50 relative">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1 font-bold tracking-wide">
-              {/* Icon merah di atas putih = Kontras Tajam (Good) */}
-              <Phone size={12} className="text-red-600" /> 
+              {/* Icon putih biar kontras sama background merah */}
+              <Phone size={12} className="text-white" /> 
               WHATSAPP: 0851-7414-5007
             </span>
           </div>
           <div className="hidden md:flex gap-6 font-medium">
-             {/* Teks secondary gue gelapin dikit biar kebaca di background putih */}
-             <span className="text-slate-600">Melayani Jabodetabek</span>
+             {/* Teks secondary putih agak transparan dikit biar ada hierarki, atau putih solid juga oke */}
+             <span className="text-red-100">Melayani Jabodetabek</span>
           </div>
         </div>
       </div>
       
-      {/* 2. MAIN NAVBAR (Tetap Merah) */}
-      <header className="bg-red-700 shadow-xl py-4 transition-all">
+      {/* 2. MAIN NAVBAR - SEKARANG PUTIH (Clean Look) */}
+      <header className="bg-white shadow-md py-4 transition-all">
         <div className="container mx-auto px-4 flex items-center justify-between">
           
-          {/* Logo */}
-          <Link href="/" className="font-bold text-2xl tracking-tighter text-white">
-            NAGAJAYA<span className="text-white">MANDIRI</span>
+          {/* Logo Image */}
+          <Link href="/" className="flex items-center">
+            <Image 
+              src="/images/logonjm.png" 
+              alt="Logo Naga Jaya Mandiri"
+              width={400} // Gue naikin "intrinsic width" biar pas dirender gede gak pecah
+              height={120} // Gue naikin juga
+              // PERUBAHAN DISINI:
+              // h-12 (48px) untuk HP
+              // md:h-20 (80px) untuk Desktop/Laptop
+              className="h-12 md:h-20 w-auto object-contain" 
+              priority
+            />
           </Link>
 
-          {/* Desktop Menu */}
+          {/* Desktop Menu - Teks Hitam */}
           <nav className="hidden md:flex items-center gap-8">
             {siteConfig.mainNav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm font-bold text-red-100 hover:text-white hover:underline decoration-white decoration-2 underline-offset-4 transition-all uppercase"
+                // Teks Slate-900 (Hitam), Hover jadi Merah biar interaktif
+                className="text-sm font-bold text-slate-900 hover:text-red-700 hover:underline decoration-red-700 decoration-2 underline-offset-4 transition-all uppercase"
               >
                 {item.title}
               </Link>
@@ -53,17 +65,18 @@ export default function Navbar() {
 
           {/* Right Icons */}
           <div className="hidden md:flex items-center gap-4">
+             {/* Button Penawaran - Dibalik jadi Merah (Teks Putih) biar kontras di atas putih */}
              <Link
               href={siteConfig.links.whatsapp}
-              className="bg-white text-red-700 px-5 py-2 rounded text-sm font-bold uppercase hover:bg-slate-100 transition-all shadow-lg shadow-black/20"
+              className="bg-red-700 text-white px-5 py-2 rounded text-sm font-bold uppercase hover:bg-red-800 transition-all shadow-lg shadow-red-700/20"
             >
               Penawaran
             </Link>
           </div>
 
-          {/* Mobile Toggle */}
+          {/* Mobile Toggle - Jadi Hitam */}
           <button
-            className="md:hidden text-white"
+            className="md:hidden text-slate-900"
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X size={28} /> : <Menu size={28} />}
@@ -71,15 +84,16 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Overlay - Ikut tema Putih */}
       {isOpen && (
-        <div className="fixed inset-0 top-[100px] z-40 bg-red-800 border-t border-red-600 p-6 md:hidden">
+        <div className="fixed inset-0 top-[100px] z-40 bg-white border-t border-slate-100 p-6 md:hidden">
           <div className="flex flex-col gap-6">
             {siteConfig.mainNav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-xl font-bold text-white hover:text-red-200"
+                // Teks Mobile jadi hitam
+                className="text-xl font-bold text-slate-900 hover:text-red-700"
                 onClick={() => setIsOpen(false)}
               >
                 {item.title}
