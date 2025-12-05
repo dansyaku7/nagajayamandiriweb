@@ -47,7 +47,7 @@ export default function Hero() {
              </Link>
 
              <Link
-                href="/portfolio"
+                href={siteConfig.portfolio[0].href}
                 className="border-2 border-white text-white px-8 py-4 rounded font-bold text-lg hover:bg-white hover:text-slate-900 transition-all flex items-center justify-center gap-2"
              >
                 Lihat Portfolio <ArrowRight size={20} />

@@ -14,5 +14,8 @@ export const siteConfig = {
   contact: {
     phone: "0851-7414-5007",
     address: "Jabodetabek & Sekitarnya"
-  }
+  },
+  portfolio: [
+    { title: "Portofolio", href: "#services" }
+  ]
 };
