@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Hero from "@/components/Hero";
 import { siteConfig } from "@/config/site";
-import { CheckCircle2, MapPin, Instagram, Phone, Lightbulb, Layers, MessageCircle, ArrowUpRight, Star, Quote } from "lucide-react";
+import { CheckCircle2, MapPin, Instagram, Lightbulb, Layers, ArrowUpRight, Star, Quote } from "lucide-react";
 
 export default function Home() {
   const portfolioItems = [
@@ -251,12 +251,21 @@ export default function Home() {
                Konsultasikan kebutuhan Anda sekarang.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+               {/* BUTTON WA: Icon diganti Image */}
                <Link 
                   href={siteConfig.links.whatsapp}
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white text-red-700 px-8 py-4 rounded-full font-bold text-lg hover:bg-slate-100 shadow-xl transition-transform hover:-translate-y-1"
                >
-                  <MessageCircle size={24} /> Hubungi Kami
+                  <Image 
+                    src="/images/logowa2.png" 
+                    alt="WA" 
+                    width={24} 
+                    height={24} 
+                    className="w-6 h-6 object-contain"
+                  />
+                  Hubungi Kami by Whatsapp
                </Link>
+               
                <Link 
                   href="#footer"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-red-700 transition-colors"
@@ -288,7 +297,16 @@ export default function Home() {
                </p>
                <div className="flex gap-4">
                   <Link href={siteConfig.links.instagram} className="bg-slate-100 p-3 rounded-full text-slate-900 hover:bg-red-600 hover:text-white transition-all"><Instagram size={20} /></Link>
-                  <Link href={siteConfig.links.whatsapp} className="bg-slate-100 p-3 rounded-full text-slate-900 hover:bg-red-600 hover:text-white transition-all"><Phone size={20} /></Link>
+                  {/* Footer Social WA: Icon diganti Image */}
+                  <Link href={siteConfig.links.whatsapp} className="bg-slate-100 p-3 rounded-full text-slate-900 hover:bg-red-600 hover:text-white transition-all">
+                    <Image 
+                      src="/images/logowa2.png" 
+                      alt="WA" 
+                      width={20} 
+                      height={20} 
+                      className="w-5 h-5 object-contain"
+                    />
+                  </Link>
                </div>
             </div>
             
@@ -309,8 +327,15 @@ export default function Home() {
                     <MapPin size={18} className="shrink-0 text-red-600 mt-1" />
                     <span>Jabodetabek & Sekitarnya</span>
                   </div>
+                  {/* Footer Contact Info: Icon diganti Image */}
                   <div className="flex items-center gap-3">
-                    <Phone size={18} className="shrink-0 text-red-600" />
+                    <Image 
+                      src="/images/logowa2.png" 
+                      alt="WA" 
+                      width={18} 
+                      height={18} 
+                      className="w-[18px] h-[18px] object-contain shrink-0"
+                    />
                     <span>{siteConfig.contact.phone}</span>
                   </div>
                </div>
