@@ -39,29 +39,38 @@ export default function Home() {
 <section id="about" className="py-16 md:py-24 container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           
-          {/* KOLOM KIRI: FOTO OWNER (Real Pict) */}
+          {/* KOLOM KIRI: FOTO OWNER (New Style) */}
           <div className="relative group">
-            {/* Frame Foto */}
-            <div className="relative h-[500px] w-full overflow-hidden rounded-2xl shadow-2xl border-4 border-white bg-slate-200">
+            <div className="relative h-[500px] w-full overflow-hidden rounded-2xl shadow-2xl bg-slate-900">
                <Image 
-                 src="/images/owner.jpg" // Pastikan nama file ini bener!
+                 src="/images/owner.jpg" 
                  alt="Niko Christian - Owner NJM Advertising"
                  fill
                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                />
-               {/* Overlay Gradient Halus dibawah biar tulisan kebaca */}
-               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-            </div>
+               
+               {/* Overlay Gradient Hitam (Biar text putih kebaca jelas) */}
+               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90"></div>
 
-            {/* Badge Nama Floating */}
-            <div className="absolute bottom-6 left-6 right-6 md:left-6 md:right-auto bg-white/95 backdrop-blur-md p-6 rounded-xl shadow-lg border border-slate-100">
-                <p className="text-xs text-brand-red font-bold uppercase tracking-widest mb-1">Founder & Owner</p>
-                <h4 className="text-xl font-black text-slate-900">Niko Christian</h4>
-                <p className="text-slate-500 text-sm mt-1">"Kualitas dan kepuasan klien adalah prioritas utama kami di workshop ini."</p>
+               {/* TEXT CONTENT (Langsung di atas gambar, tanpa kotak) */}
+               <div className="absolute bottom-0 left-0 w-full p-8 md:p-10">
+                   <p className="text-brand-red font-bold uppercase tracking-widest mb-2 text-xs md:text-sm">
+                      Founder & Owner
+                   </p>
+                   <h4 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tight">
+                      Niko Christian
+                   </h4>
+                   {/* Quote dengan garis merah disamping */}
+                   <div className="border-l-4 border-brand-red pl-4">
+                      <p className="text-slate-200 text-sm md:text-base italic font-medium leading-relaxed">
+                        "Kualitas dan kepuasan klien adalah prioritas utama kami di workshop ini."
+                      </p>
+                   </div>
+               </div>
             </div>
           </div>
 
-          {/* KOLOM KANAN: TEXT & VISI MISI */}
+          {/* KOLOM KANAN: TEXT & VISI MISI (Tetap sama, cuma dirapihin dikit) */}
           <div>
             <h2 className="text-brand-red font-bold uppercase tracking-widest mb-3 text-sm md:text-base">Tentang NJM Advertising</h2>
             <h3 className="text-3xl md:text-4xl font-black text-slate-900 mb-6 leading-tight">
@@ -71,20 +80,17 @@ export default function Home() {
               NJM Advertising lahir dari semangat untuk membantu bisnis tampil beda. Berbasis di workshop sendiri, kami memastikan setiap potong acrylic dan setiap titik las dikerjakan dengan presisi tinggi oleh tangan-tangan ahli.
             </p>
 
-            {/* Feature List (Presisi, dll) */}
-            <div className="flex flex-wrap gap-4 mb-8">
-               <div className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-full border border-slate-200 text-slate-700 font-bold text-sm">
-                  <CheckCircle2 size={18} className="text-green-600" /> Workshop Milik Sendiri
+            {/* Feature List */}
+            <div className="flex flex-wrap gap-3 mb-8">
+               <div className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-full border border-slate-200 text-slate-700 font-bold text-xs md:text-sm">
+                  <CheckCircle2 size={16} className="text-brand-red" /> Workshop Milik Sendiri
                </div>
-               <div className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-full border border-slate-200 text-slate-700 font-bold text-sm">
-                  <CheckCircle2 size={18} className="text-green-600" /> Pengerjaan Rapi
-               </div>
-               <div className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-full border border-slate-200 text-slate-700 font-bold text-sm">
-                  <CheckCircle2 size={18} className="text-green-600" /> Tepat Waktu
+               <div className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-full border border-slate-200 text-slate-700 font-bold text-xs md:text-sm">
+                  <CheckCircle2 size={16} className="text-brand-red" /> Pengerjaan Rapi
                </div>
             </div>
             
-            {/* Visi Misi Compact */}
+            {/* Visi Misi */}
             <div className="space-y-4">
                <div className="flex gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
                   <div className="bg-brand-red/10 p-3 h-fit rounded-lg text-brand-red">
