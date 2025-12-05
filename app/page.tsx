@@ -74,7 +74,7 @@ export default function Home() {
           <div>
             <h2 className="text-brand-red font-bold uppercase tracking-widest mb-3 text-sm md:text-base">Tentang NJM Advertising</h2>
             <h3 className="text-3xl md:text-4xl font-black text-slate-900 mb-6 leading-tight">
-              Lebih Dari Sekadar <br /> Tukang Reklame.
+              Tentang Kami <br />
             </h3>
             <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-8">
               NJM Advertising lahir dari semangat untuk membantu bisnis tampil beda. Berbasis di workshop sendiri, kami memastikan setiap potong acrylic dan setiap titik las dikerjakan dengan presisi tinggi oleh tangan-tangan ahli.
