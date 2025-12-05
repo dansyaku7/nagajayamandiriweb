@@ -119,7 +119,6 @@ export default function Home() {
       </section>
 
       {/* 3. LAYANAN (Target: #services) */}
-      {/* UPDATED: Background Services jadi Merah */}
       <section id="services" className="py-16 md:py-24 bg-red-700 text-white relative overflow-hidden">
         {/* Blur effect diganti jadi putih tipis biar keliatan di background merah */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
@@ -172,7 +171,7 @@ export default function Home() {
               ))}
            </div>
 
-           {/* --- UPDATED: INSTAGRAM LINK SECTION --- */}
+           {/* --- INSTAGRAM LINK SECTION --- */}
            <div className="flex justify-center md:justify-end">
               <div className="inline-flex flex-col md:flex-row items-center gap-2 md:gap-3 bg-white px-6 py-4 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-all">
                 <span className="text-slate-600 font-medium text-sm md:text-base">
@@ -184,7 +183,7 @@ export default function Home() {
                   className="flex items-center gap-2 text-red-700 font-bold text-sm md:text-base hover:text-red-800 hover:underline"
                 >
                   <Instagram size={20} />
-                  @nagajayamandiri {/* Ganti text ini sesuai handle IG lo */}
+                  @nagajayamandiri
                   <ArrowUpRight size={16} />
                 </Link>
               </div>
@@ -194,7 +193,6 @@ export default function Home() {
       </section>
 
       {/* 5. CTA SECTION */}
-      {/* UPDATED: Background CTA jadi Merah */}
       <section id="cta" className="py-20 md:py-24 bg-red-700">
          <div className="container mx-auto px-6 text-center">
             <h2 className="text-2xl md:text-5xl font-black text-white mb-6 tracking-tight">
@@ -206,7 +204,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                
-               {/* Button Utama: Jadi Putih Text Merah (Biar kontras) */}
+               {/* Button Utama */}
                <Link 
                   href={siteConfig.links.whatsapp}
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white text-red-700 px-8 py-4 rounded-full font-bold text-lg hover:bg-slate-100 shadow-xl transition-transform hover:-translate-y-1"
@@ -214,7 +212,7 @@ export default function Home() {
                   <MessageCircle size={24} /> Hubungi Kami
                </Link>
 
-               {/* Button Kedua: Border Putih Text Putih */}
+               {/* Button Kedua */}
                <Link 
                   href="#footer"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-red-700 transition-colors"
@@ -229,7 +227,7 @@ export default function Home() {
       <footer id="footer" className="bg-white text-slate-600 py-12 md:py-16 border-t border-slate-200">
          <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 border-b border-slate-200 pb-12 mb-12">
             <div className="md:col-span-2">
-               {/* --- UPDATED: LOGO DI FOOTER --- */}
+               {/* --- LOGO DI FOOTER --- */}
                <div className="flex items-center gap-3 mb-6">
                   <Image 
                     src="/images/logonjm.png" 
@@ -280,6 +278,35 @@ export default function Home() {
             &copy; {new Date().getFullYear()} NJM Advertising. All rights reserved.
          </div>
       </footer>
+
+      {/* --- FLOATING BUTTONS CONTAINER --- */}
+      {/* Wrapper fixed untuk menampung kedua tombol floating */}
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-4 items-end animate-in fade-in slide-in-from-bottom-8 duration-700">
+        
+        {/* 1. Tombol Instagram Floating (Sekunder - Di Atas) */}
+        <Link
+          href={siteConfig.links.instagram}
+          target="_blank"
+          aria-label="Kunjungi Instagram"
+          className="flex items-center gap-3 bg-gradient-to-tr from-[#833ab4] via-[#fd1d1d] to-[#fcb045] text-white px-5 py-3 md:px-6 md:py-3 rounded-full shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1 hover:scale-105"
+        >
+          <Instagram size={24} />
+          <span className="font-bold text-sm md:text-base">Instagram @njm.advertising</span>
+        </Link>
+
+        {/* 2. Tombol WhatsApp Floating (Primary - Paling Bawah) */}
+        <Link
+          href={siteConfig.links.whatsapp}
+          target="_blank"
+          aria-label="Hubungi WhatsApp"
+          className="flex items-center gap-3 bg-[#25D366] text-white px-5 py-3 md:px-6 md:py-4 rounded-full shadow-2xl hover:bg-[#128C7E] transition-all hover:-translate-y-1 hover:scale-105"
+        >
+          <MessageCircle size={28} fill="white" className="text-[#25D366]" />
+          <span className="font-bold text-base md:text-lg">Hubungi Sekarang!</span>
+        </Link>
+
+      </div>
+
     </main>
   );
 }
