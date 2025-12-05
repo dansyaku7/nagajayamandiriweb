@@ -11,7 +11,7 @@ export default function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full">
         <Image
-          src="/images/hero-bg.jpg"
+          src="/images/ballroom2.jpg"
           alt="Background Pylon Sign"
           fill
           // Tambah object-center biar fokus di tengah
