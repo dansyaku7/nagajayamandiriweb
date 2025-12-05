@@ -1,8 +1,11 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Hero from "@/components/Hero";
 import { siteConfig } from "@/config/site";
-import { CheckCircle2, MapPin, Instagram, Lightbulb, Layers, ArrowUpRight, Star, Quote } from "lucide-react";
+import { CheckCircle2, MapPin, Instagram, Phone, Lightbulb, Layers, MessageCircle, ArrowUpRight, Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function Home() {
   const portfolioItems = [
@@ -48,6 +51,30 @@ export default function Home() {
     },
   ];
 
+  // --- LOGIC SLIDER OWNER ---
+  const [currentOwnerIndex, setCurrentOwnerIndex] = useState(0);
+  const ownerImages = [
+    "/images/owner.jpg",
+    "/images/owner12.jpg",
+    "/images/owner2.jpg"
+  ];
+
+  // Auto slide setiap 5 detik
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentOwnerIndex((prev) => (prev + 1) % ownerImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [ownerImages.length]);
+
+  const nextOwner = () => {
+    setCurrentOwnerIndex((prev) => (prev + 1) % ownerImages.length);
+  };
+
+  const prevOwner = () => {
+    setCurrentOwnerIndex((prev) => (prev - 1 + ownerImages.length) % ownerImages.length);
+  };
+
   return (
     <main className="flex min-h-screen flex-col bg-white">
       
@@ -58,17 +85,50 @@ export default function Home() {
       <section id="about" className="py-16 md:py-24 container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           
-          {/* KOLOM KIRI: FOTO OWNER */}
-          <div className="relative group">
+          {/* KOLOM KIRI: FOTO OWNER (SLIDER) */}
+          <div className="relative group select-none"> {/* select-none biar ga ke-block biru pas klik cepet */}
             <div className="relative h-[500px] w-full overflow-hidden rounded-2xl shadow-2xl bg-red-700">
-               <Image 
-                 src="/images/owner.jpg" 
-                 alt="Niko Christian - Owner NJM Advertising"
-                 fill
-                 className="object-cover transition-transform duration-700 group-hover:scale-105"
-               />
-               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90"></div>
-               <div className="absolute bottom-0 left-0 w-full p-8 md:p-10">
+               
+               {/* SLIDER IMAGES */}
+               {ownerImages.map((src, index) => (
+                 <div 
+                    key={index}
+                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                      index === currentOwnerIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+                    }`}
+                 >
+                   <Image 
+                     src={src} 
+                     alt={`Niko Christian - Owner NJM Advertising ${index + 1}`}
+                     fill
+                     className="object-cover transition-transform duration-700 group-hover:scale-105"
+                   />
+                 </div>
+               ))}
+
+               {/* BUTTON NAVIGATION (Muncul Pas Hover) */}
+               <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 z-40 flex justify-between px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <button 
+                    onClick={prevOwner} 
+                    className="bg-black/40 text-white p-2 rounded-full hover:bg-red-600 backdrop-blur-sm transition-all hover:scale-110"
+                    aria-label="Previous Photo"
+                  >
+                    <ChevronLeft size={28} />
+                  </button>
+                  <button 
+                    onClick={nextOwner} 
+                    className="bg-black/40 text-white p-2 rounded-full hover:bg-red-600 backdrop-blur-sm transition-all hover:scale-110"
+                    aria-label="Next Photo"
+                  >
+                    <ChevronRight size={28} />
+                  </button>
+               </div>
+               
+               {/* Overlay Gradient Hitam (Z-Index harus diatas image tapi dibawah text) */}
+               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 z-20"></div>
+
+               {/* TEXT CONTENT (Z-Index paling atas biar bisa dibaca & dicopy) */}
+               <div className="absolute bottom-0 left-0 w-full p-8 md:p-10 z-30">
                    <p className="text-red-400 font-bold uppercase tracking-widest mb-2 text-xs md:text-sm">
                       Founder & Owner
                    </p>
