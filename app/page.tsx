@@ -36,38 +36,77 @@ export default function Home() {
       <Hero />
 
       {/* 2. ABOUT (Gua tetep kasih id="about" buat jaga-jaga) */}
-      <section id="about" className="py-16 md:py-24 container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-12">
-          <div>
-            <h2 className="text-brand-red font-bold uppercase tracking-widest mb-2 text-sm md:text-base">Tentang NJM Advertising</h2>
-            <h3 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Membangun Identitas Visual Bisnis Anda</h3>
-            <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-6">
-              Kami adalah penyedia layanan pembuatan media promosi visual yang berfokus pada neonbox, huruf timbul, dan signage profesional. 
-              Kami membantu UMKM, brand, hingga korporasi membangun identitas visual yang kuat dengan standar produksi modern.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 text-slate-800 font-medium">
-               <div className="flex items-center gap-2"><CheckCircle2 className="text-green-600" /> Presisi</div>
-               <div className="flex items-center gap-2"><CheckCircle2 className="text-green-600" /> Estetik</div>
-               <div className="flex items-center gap-2"><CheckCircle2 className="text-green-600" /> Tahan Lama</div>
+<section id="about" className="py-16 md:py-24 container mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
+          {/* KOLOM KIRI: FOTO OWNER (Real Pict) */}
+          <div className="relative group">
+            {/* Frame Foto */}
+            <div className="relative h-[500px] w-full overflow-hidden rounded-2xl shadow-2xl border-4 border-white bg-slate-200">
+               <Image 
+                 src="/images/owner.jpg" // Pastikan nama file ini bener!
+                 alt="Niko Christian - Owner NJM Advertising"
+                 fill
+                 className="object-cover transition-transform duration-700 group-hover:scale-105"
+               />
+               {/* Overlay Gradient Halus dibawah biar tulisan kebaca */}
+               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+            </div>
+
+            {/* Badge Nama Floating */}
+            <div className="absolute bottom-6 left-6 right-6 md:left-6 md:right-auto bg-white/95 backdrop-blur-md p-6 rounded-xl shadow-lg border border-slate-100">
+                <p className="text-xs text-brand-red font-bold uppercase tracking-widest mb-1">Founder & Owner</p>
+                <h4 className="text-xl font-black text-slate-900">Niko Christian</h4>
+                <p className="text-slate-500 text-sm mt-1">"Kualitas dan kepuasan klien adalah prioritas utama kami di workshop ini."</p>
             </div>
           </div>
-          
-          <div className="bg-slate-50 p-6 md:p-8 rounded-2xl border border-slate-100 shadow-sm mt-6 md:mt-0">
-             <div className="mb-6">
-                <h4 className="flex items-center gap-2 font-bold text-xl text-slate-900 mb-2">
-                   <Lightbulb className="text-brand-red" /> Visi
-                </h4>
-                <p className="text-slate-600 text-sm md:text-base">Menjadi penyedia solusi media promosi visual terpercaya dan berkualitas di Jabodetabek.</p>
-             </div>
-             <div>
-                <h4 className="flex items-center gap-2 font-bold text-xl text-slate-900 mb-2">
-                   <Layers className="text-brand-red" /> Misi
-                </h4>
-                <ul className="space-y-2 text-slate-600 text-sm md:text-base">
-                   <li className="flex gap-2"><span>•</span> Memberikan hasil produk signage yang presisi & estetik.</li>
-                   <li className="flex gap-2"><span>•</span> Pelayanan cepat, profesional, dan responsif.</li>
-                </ul>
-             </div>
+
+          {/* KOLOM KANAN: TEXT & VISI MISI */}
+          <div>
+            <h2 className="text-brand-red font-bold uppercase tracking-widest mb-3 text-sm md:text-base">Tentang NJM Advertising</h2>
+            <h3 className="text-3xl md:text-4xl font-black text-slate-900 mb-6 leading-tight">
+              Lebih Dari Sekadar <br /> Tukang Reklame.
+            </h3>
+            <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-8">
+              NJM Advertising lahir dari semangat untuk membantu bisnis tampil beda. Berbasis di workshop sendiri, kami memastikan setiap potong acrylic dan setiap titik las dikerjakan dengan presisi tinggi oleh tangan-tangan ahli.
+            </p>
+
+            {/* Feature List (Presisi, dll) */}
+            <div className="flex flex-wrap gap-4 mb-8">
+               <div className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-full border border-slate-200 text-slate-700 font-bold text-sm">
+                  <CheckCircle2 size={18} className="text-green-600" /> Workshop Milik Sendiri
+               </div>
+               <div className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-full border border-slate-200 text-slate-700 font-bold text-sm">
+                  <CheckCircle2 size={18} className="text-green-600" /> Pengerjaan Rapi
+               </div>
+               <div className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-full border border-slate-200 text-slate-700 font-bold text-sm">
+                  <CheckCircle2 size={18} className="text-green-600" /> Tepat Waktu
+               </div>
+            </div>
+            
+            {/* Visi Misi Compact */}
+            <div className="space-y-4">
+               <div className="flex gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
+                  <div className="bg-brand-red/10 p-3 h-fit rounded-lg text-brand-red">
+                     <Lightbulb size={24} />
+                  </div>
+                  <div>
+                     <h4 className="font-bold text-slate-900 mb-1">Visi Kami</h4>
+                     <p className="text-slate-600 text-sm">Menjadi partner visual branding nomor 1 di Jabodetabek yang mengutamakan kualitas.</p>
+                  </div>
+               </div>
+
+               <div className="flex gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
+                  <div className="bg-brand-red/10 p-3 h-fit rounded-lg text-brand-red">
+                     <Layers size={24} />
+                  </div>
+                  <div>
+                     <h4 className="font-bold text-slate-900 mb-1">Misi Kami</h4>
+                     <p className="text-slate-600 text-sm">Menghadirkan inovasi material terbaru & pelayanan yang responsif untuk setiap klien.</p>
+                  </div>
+               </div>
+            </div>
+
           </div>
         </div>
       </section>
