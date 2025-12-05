@@ -1,25 +1,58 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, ArrowRight, Instagram } from "lucide-react";
 import { siteConfig } from "@/config/site";
 
+// Array Gambar Background (Diambil dari portfolio)
+const heroImages = [
+  "/images/ballroom2.jpg",
+  "/images/security.jpg",
+  "/images/royalurban.jpg",
+  "/images/carwashgogo.jpg",
+  "/images/padel.jpg",
+  "/images/olsedonut.jpg",
+];
+
 export default function Hero() {
+  const [currentImage, setCurrentImage] = useState(0);
+
+  // Logic ganti gambar setiap 6 detik (6000ms)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % heroImages.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     // PERUBAHAN: Ganti min-h-screen jadi tinggi fix biar ga terlalu maksa nge-zoom
     <section className="relative w-full h-[600px] md:h-[800px] flex items-center justify-center overflow-hidden">
 
-      {/* Background Image */}
+      {/* Background Image Slider */}
       <div className="absolute inset-0 w-full h-full">
-        <Image
-          src="/images/ballroom2.jpg"
-          alt="Background Pylon Sign"
-          fill
-          // Tambah object-center biar fokus di tengah
-          className="object-cover object-center"
-          priority
-        />
-        {/* Overlay Hitam */}
-        <div className="absolute inset-0 bg-black/70 md:bg-black/60" />
+        {heroImages.map((src, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+              index === currentImage ? "opacity-100 z-0" : "opacity-0 -z-10"
+            }`}
+          >
+            <Image
+              src={src}
+              alt={`Background Slide ${index + 1}`}
+              fill
+              // Tambah object-center biar fokus di tengah
+              className="object-cover object-center"
+              priority={index === 0} // Load prioritas cuma buat gambar pertama
+            />
+          </div>
+        ))}
+        
+        {/* Overlay Hitam - Static di atas semua gambar */}
+        <div className="absolute inset-0 bg-black/70 md:bg-black/60 z-1" />
       </div>
 
       {/* Content */}
