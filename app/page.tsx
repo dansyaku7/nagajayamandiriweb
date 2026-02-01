@@ -402,7 +402,7 @@ export default function Home() {
             </div>
          </div>
          <div className="container mx-auto px-6 text-center text-sm text-slate-500">
-            &copy; {new Date().getFullYear()} NJM Advertising. All rights reserved.
+            &copy; {new Date().getFullYear()} NJM Advertising. All rights reserved by SYK.
          </div>
       </footer>
 
