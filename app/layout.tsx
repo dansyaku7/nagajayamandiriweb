@@ -13,7 +13,8 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "NJM Advertising - Jasa Neon Box, Huruf Timbul & Signage Jakarta Jabodetabek",
+    default:
+      "NJM Advertising - Jasa Neon Box, Huruf Timbul & Signage Jakarta Jabodetabek",
     template: "%s | NJM Advertising",
   },
   description:
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
     "kontraktor advertising jabodetabek",
     "neon sign custom",
     "naga jaya mandiri",
-    "njm advertising"
+    "njm advertising",
   ],
   authors: [{ name: "Niko Christian" }, { name: "NJM Advertising" }],
   creator: "NJM Advertising",
@@ -44,7 +45,8 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "NJM Advertising - Jasa Neon Box, Huruf Timbul & Signage Profesional",
+    title:
+      "NJM Advertising - Jasa Neon Box, Huruf Timbul & Signage Profesional",
     description:
       "Partner visual branding & advertising terbaik di Jabodetabek. Spesialis pembuatan Neon Box, Huruf Timbul, Pylon Sign, hingga Billboard dengan workshop milik sendiri.",
     url: siteConfig.url,
@@ -118,7 +120,7 @@ const jsonLd = {
       ],
       sameAs: [
         "https://instagram.com/njm.advertising",
-        "https://instagram.com/nagajayamandiri"
+        "https://instagram.com/nagajayamandiri",
       ],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
@@ -129,7 +131,8 @@ const jsonLd = {
             itemOffered: {
               "@type": "Service",
               name: "Jasa Pembuatan Neon Box",
-              description: "Media promosi visual menyala siang dan malam dengan bahan acrylic atau backlite berkualitas.",
+              description:
+                "Media promosi visual menyala siang dan malam dengan bahan acrylic atau backlite berkualitas.",
             },
           },
           {
@@ -137,7 +140,8 @@ const jsonLd = {
             itemOffered: {
               "@type": "Service",
               name: "Jasa Huruf Timbul (Letter Sign)",
-              description: "Pembuatan huruf timbul berbahan Stainless, Acrylic, Galvanis, LED, dan Acrylic LED.",
+              description:
+                "Pembuatan huruf timbul berbahan Stainless, Acrylic, Galvanis, LED, dan Acrylic LED.",
             },
           },
           {
@@ -145,7 +149,8 @@ const jsonLd = {
             itemOffered: {
               "@type": "Service",
               name: "Pylon / Totem Sign",
-              description: "Penanda identitas bisnis skala besar yang kokoh, megah, dan elegan.",
+              description:
+                "Penanda identitas bisnis skala besar yang kokoh, megah, dan elegan.",
             },
           },
           {
@@ -153,7 +158,8 @@ const jsonLd = {
             itemOffered: {
               "@type": "Service",
               name: "Billboard & Videotron",
-              description: "Konstruksi media reklame luar ruang skala besar untuk visibilitas maksimal.",
+              description:
+                "Konstruksi media reklame luar ruang skala besar untuk visibilitas maksimal.",
             },
           },
           {
@@ -161,7 +167,8 @@ const jsonLd = {
             itemOffered: {
               "@type": "Service",
               name: "Neon Sign Custom",
-              description: "Lampu neon fleksibel artistik untuk interior cafe, outlet, dan dekorasi komersial.",
+              description:
+                "Lampu neon fleksibel artistik untuk interior cafe, outlet, dan dekorasi komersial.",
             },
           },
           {
@@ -169,7 +176,8 @@ const jsonLd = {
             itemOffered: {
               "@type": "Service",
               name: "Shop Signage & Fascia Toko",
-              description: "Branding fasad toko dan signage toko profesional yang menarik perhatian pembeli.",
+              description:
+                "Branding fasad toko dan signage toko profesional yang menarik perhatian pembeli.",
             },
           },
         ],
@@ -196,15 +204,18 @@ export default function RootLayout({
   return (
     <html lang="id" className="scroll-smooth">
       <head>
+        {/* Google Site Verification */}
+        <meta
+          name="google-site-verification"
+          content="qfA98IfdPHRGjLz0V6E4s_NG6eAujthOFmPpqXNzO1E"
+        />
+
         {/* Google Analytics 4 (gtag.js) */}
         <Script
           strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=G-2T3N94DB2Y"
         />
-        <Script
-          id="google-analytics-init"
-          strategy="afterInteractive"
-        >
+        <Script id="google-analytics-init" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
