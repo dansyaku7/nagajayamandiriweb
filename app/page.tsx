@@ -1383,8 +1383,8 @@ export default function Home() {
               <div className="flex items-start gap-3">
                 <MapPin size={18} className="shrink-0 text-red-500 mt-1" />
                 <span>
-                  Jabodetabek & Sekitarnya (Jakarta, Bogor, Depok, Tangerang,
-                  Bekasi)
+                  HVR3+R7R, Jl. Tole Iskandar No.22 b, Sukamaju, Kec. Cilodong,
+                  Kota Depok, Jawa Barat 16415
                 </span>
               </div>
               <div className="flex items-center gap-3">
