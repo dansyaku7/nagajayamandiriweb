@@ -23,6 +23,24 @@ Data panel saat lokal/preview disimpan di folder `njm-local/` / `njm-preview/` p
 - **Tab Foto:** 28 slot — logo, gambar share, favicon, ikon WhatsApp, 6 slide hero, 3 foto owner, dan 15 foto portofolio.
   Bisa diganti lewat unggah file atau URL, dan dikembalikan ke default. Foto besar diperkecil otomatis di browser (maks. 2200 px).
 - Perubahan langsung aktif tanpa deploy ulang: halaman dibuat ulang otomatis setiap kali panel menyimpan.
+- **Tab Dashboard:** statistik pengunjung dengan rentang 7/30/90 hari/1 tahun. Isinya:
+  - pengunjung, page view, klik WhatsApp, rata-rata lama dilihat, dan bounce rate (keluar < 10 detik tanpa klik);
+  - tren harian atau mingguan;
+  - klik WhatsApp & Instagram per tombol;
+  - sumber trafik, section yang dilihat, portofolio yang dibuka, perangkat, browser, dan kota.
+
+  Di bawahnya ada riwayat Google Analytics 4, bila sudah dihubungkan.
+
+## Statistik (Upstash Redis + GA4)
+
+- `components/Tracker.tsx` dan `lib/analytics.ts` mengirim event ke `/api/t`. Pelacakan berjalan tanpa cookie: pengunjung unik
+  dihitung dari hash harian IP + browser yang tidak bisa dibalik.
+- Data disimpan di Upstash Redis (integrasi Vercel Marketplace `njm-analytics`, env `KV_REST_API_*` dipasang otomatis):
+  satu hash per hari (WIB) di `njm:st:d:<tanggal>`, disimpan ±13 bulan. Kode pencatatnya ada di `lib/server/stats.ts`.
+- Klik WhatsApp tetap dikirim juga ke GA4 sebagai event `generate_lead`, sedangkan klik Instagram sebagai `click_instagram`.
+- Browser yang pernah membuka panel tidak ikut dihitung. Pengaturannya ada di bagian bawah tab Dashboard.
+- GA4 dibaca lewat Google Analytics Data API dengan service account. Kunci JSON-nya diunggah dari panel, lalu
+  disimpan terenkripsi di Redis (`lib/server/ga.ts`), bukan di repo maupun env.
 
 ## Penyimpanan (Vercel Blob)
 

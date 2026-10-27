@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import Navbar from "@/components/Navbar";
 import { SiteImagesProvider } from "@/components/SiteImages";
+import { Tracker } from "@/components/Tracker";
 import { resolveImage } from "@/config/images";
 import { getImages, getSeo } from "@/lib/server/store";
 
@@ -245,6 +246,7 @@ export default async function SiteLayout({
         <Navbar />
         {children}
       </SiteImagesProvider>
+      <Tracker />
     </>
   );
 }

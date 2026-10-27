@@ -7,6 +7,7 @@ import {
   Eye,
   EyeOff,
   Globe,
+  LayoutDashboard,
   Image as ImageIcon,
   KeyRound,
   Loader2,
@@ -22,6 +23,7 @@ import { SEO_LIMITS, type SeoSettings } from "@/config/seo";
 import { cn } from "@/lib/utils";
 import { api, ApiError } from "./api";
 import { ImagesPanel } from "./ImagesPanel";
+import { StatsPanel } from "./StatsPanel";
 
 type Errors = Partial<Record<keyof SeoSettings, string>>;
 
@@ -364,10 +366,10 @@ function SeoPanel({ onLogout, overrides, onOpenImages }: { onLogout: () => void;
   );
 }
 
-type Tab = "seo" | "images";
+type Tab = "stats" | "seo" | "images";
 
 function Dashboard({ onLogout }: { onLogout: () => void }) {
-  const [tab, setTab] = useState<Tab>("seo");
+  const [tab, setTab] = useState<Tab>("stats");
   const [overrides, setOverrides] = useState<ImageOverrides>({});
 
   useEffect(() => {
@@ -396,6 +398,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
           <nav className="flex gap-1 rounded-full bg-slate-100 p-1" aria-label="Bagian panel">
             {(
               [
+                { id: "stats", label: "Dashboard", icon: LayoutDashboard },
                 { id: "seo", label: "SEO", icon: Search },
                 { id: "images", label: "Foto", icon: ImageIcon },
               ] as const
@@ -404,13 +407,15 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
                 key={t.id}
                 type="button"
                 onClick={() => setTab(t.id)}
+                aria-label={t.label}
                 className={cn(
                   "flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-colors",
                   tab === t.id ? "bg-slate-950 text-white" : "text-slate-500 hover:text-slate-900",
                 )}
               >
                 <t.icon className="h-4 w-4" />
-                <span>{t.label}</span>
+                {/* Di layar sempit hanya tab aktif yang menampilkan nama */}
+                <span className={tab === t.id ? "inline" : "hidden sm:inline"}>{t.label}</span>
               </button>
             ))}
           </nav>
@@ -425,7 +430,9 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
         </div>
       </header>
 
-      {tab === "seo" ? (
+      {tab === "stats" ? (
+        <StatsPanel onLogout={onLogout} />
+      ) : tab === "seo" ? (
         <SeoPanel onLogout={onLogout} overrides={overrides} onOpenImages={() => setTab("images")} />
       ) : (
         <ImagesPanel overrides={overrides} onChange={setOverrides} onLogout={onLogout} />

@@ -1,3 +1,4 @@
+import type { GaReport, GaStatus, RangeDays, StatsReport } from "@/config/analytics";
 import type { ImageOverrides, SlotId } from "@/config/images";
 import type { SeoSettings } from "@/config/seo";
 
@@ -38,4 +39,8 @@ export const api = {
       headers: { "Content-Type": file.type },
       body: file,
     }),
+  getStats: (days: RangeDays) => request<{ enabled: boolean; report: StatsReport | null }>(`/stats?days=${days}`),
+  getGa: (days: RangeDays) => request<{ status: GaStatus; report: GaReport | null; error: string | null }>(`/ga?days=${days}`),
+  saveGa: (body: { key?: string; propertyId?: string }) => request<{ status: GaStatus }>("/ga", { method: "PUT", body: JSON.stringify(body) }),
+  removeGa: () => request<{ status: GaStatus }>("/ga", { method: "DELETE" }),
 };

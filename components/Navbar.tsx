@@ -150,7 +150,10 @@ export default function Navbar() {
               <Link
                 href={siteConfig.links.whatsapp}
                 target="_blank"
-                onClick={() => setIsOpen(false)}
+                onClick={() => {
+                  trackWhatsAppClick("navbar_mobile");
+                  setIsOpen(false);
+                }}
                 className="flex items-center justify-center gap-2 bg-red-700 hover:bg-red-800 text-white font-bold py-3.5 px-4 rounded-xl shadow-md text-sm uppercase tracking-wider transition-all"
               >
                 <MessageCircle size={18} />

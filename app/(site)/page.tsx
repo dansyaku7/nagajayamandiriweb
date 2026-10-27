@@ -7,7 +7,7 @@ import Hero from "@/components/Hero";
 import { useSiteImage } from "@/components/SiteImages";
 import { isOptimizable } from "@/config/images";
 import { siteConfig } from "@/config/site";
-import { trackWhatsAppClick } from "@/lib/analytics";
+import { trackInstagramClick, trackPortfolioView, trackWhatsAppClick } from "@/lib/analytics";
 import {
   CheckCircle2,
   MapPin,
@@ -420,6 +420,13 @@ export default function Home() {
 
   // Lightbox Modal State untuk Portofolio
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const openedProject =
+    lightboxIndex === null ? null : filteredPortfolio[lightboxIndex]?.title;
+
+  // Catat project yang dilihat (termasuk lewat tombol panah) untuk dashboard panel
+  useEffect(() => {
+    if (openedProject) trackPortfolioView(openedProject);
+  }, [openedProject]);
 
   // Navigasi Keyboard: Escape untuk tutup, panah kiri/kanan untuk navigasi
   useEffect(() => {
@@ -1087,6 +1094,7 @@ export default function Home() {
             <Link
               href={siteConfig.links.instagram}
               target="_blank"
+              onClick={() => trackInstagramClick("portfolio_banner")}
               className="inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold text-xs md:text-sm px-6 py-3 rounded-full shadow-md hover:shadow-lg transition-all shrink-0"
             >
               <Instagram size={18} />
@@ -1331,6 +1339,7 @@ export default function Home() {
               <Link
                 href={siteConfig.links.instagram}
                 target="_blank"
+                onClick={() => trackInstagramClick("footer")}
                 aria-label="Instagram NJM Advertising"
                 className="bg-slate-900 hover:bg-red-600 text-slate-300 hover:text-white p-3 rounded-full transition-colors border border-slate-800"
               >
@@ -1339,6 +1348,7 @@ export default function Home() {
               <Link
                 href={siteConfig.links.whatsapp}
                 target="_blank"
+                onClick={() => trackWhatsAppClick("footer_icon")}
                 aria-label="WhatsApp NJM Advertising"
                 className="bg-slate-900 hover:bg-red-600 text-slate-300 hover:text-white p-3 rounded-full transition-colors border border-slate-800"
               >
@@ -1436,6 +1446,7 @@ export default function Home() {
                 <Link
                   href={siteConfig.links.whatsapp}
                   target="_blank"
+                  onClick={() => trackWhatsAppClick("footer_phone")}
                   className="hover:text-red-400 transition-colors font-bold text-white"
                 >
                   {siteConfig.contact.phone}
@@ -1467,6 +1478,7 @@ export default function Home() {
         <Link
           href={siteConfig.links.instagram}
           target="_blank"
+          onClick={() => trackInstagramClick("floating_button")}
           aria-label="Kunjungi Instagram NJM Advertising"
           className="hidden sm:inline-flex items-center gap-2 bg-gradient-to-tr from-[#833ab4] via-[#fd1d1d] to-[#fcb045] text-white px-4 py-2.5 rounded-full shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5 hover:scale-105 text-xs md:text-sm font-bold"
         >

@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Phone, ArrowRight, Instagram } from "lucide-react";
 import { siteConfig } from "@/config/site";
-import { trackWhatsAppClick } from "@/lib/analytics";
+import { trackInstagramClick, trackWhatsAppClick } from "@/lib/analytics";
 import { useSiteImage } from "@/components/SiteImages";
 import { isOptimizable, type SlotId } from "@/config/images";
 
@@ -141,6 +141,7 @@ export default function Hero() {
             <Link
               href={siteConfig.links.instagram}
               target="_blank"
+              onClick={() => trackInstagramClick("hero")}
               className="inline-flex items-center gap-1.5 font-bold text-white hover:text-red-400 transition-colors bg-white/10 hover:bg-white/20 px-3 py-1 rounded-full border border-white/10"
             >
               <Instagram size={15} className="text-red-400" />

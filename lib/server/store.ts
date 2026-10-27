@@ -3,15 +3,12 @@ import { revalidatePath } from "next/cache";
 import { cache } from "react";
 import { sanitizeOverrides, type ImageOverrides, type SlotId } from "@/config/images";
 import { defaultSeo, validateSeo, type SeoSettings } from "@/config/seo";
+import { PREFIX } from "./env";
 
 /**
  * Pengaturan panel disimpan di Vercel Blob (store "njm-kelola-seo"), karena filesystem Vercel
  * read-only. BLOB_READ_WRITE_TOKEN dipasang otomatis oleh Vercel saat store disambungkan.
- *
- * Deployment preview & lokal memakai folder terpisah supaya uji coba tidak menimpa data produksi.
  */
-const env = process.env.VERCEL_ENV;
-const PREFIX = env === "production" ? "njm" : `njm-${env || "local"}`;
 const SEO_DIR = `${PREFIX}/settings/seo/`;
 const IMAGES_DIR = `${PREFIX}/settings/images/`;
 /** Versi lama yang disimpan sebagai cadangan bila perlu dikembalikan manual. */
