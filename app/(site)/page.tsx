@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Hero from "@/components/Hero";
+import { useSiteImage } from "@/components/SiteImages";
+import { isOptimizable } from "@/config/images";
 import { siteConfig } from "@/config/site";
 import { trackWhatsAppClick } from "@/lib/analytics";
 import {
@@ -35,90 +37,115 @@ import {
 } from "lucide-react";
 
 export default function Home() {
+  // Semua foto di halaman ini bisa diganti dari panel admin (/kelola-seo-njm, tab Foto).
+  const image = useSiteImage();
+  const waIcon = image("whatsapp-icon");
+
   const portfolioItems = [
     {
-      src: "/images/angkasakarya.jpg",
+      src: image("portfolio-angkasakarya"),
       title: "Angkasa Karya",
       category: "Komersial",
       tag: "Signage Fasad",
       alt: "Pengerjaan Signage Fasad Komersial Angkasa Karya oleh NJM Advertising",
     },
     {
-      src: "/images/ballroom2.jpg",
+      src: image("portfolio-ballroom"),
       title: "Ballroom Signage",
       category: "Huruf Timbul",
       tag: "Stainless Gold",
       alt: "Pemasangan Huruf Timbul Ballroom Signage Mewah Berbahan Stainless Gold",
     },
     {
-      src: "/images/banteng.jpg",
+      src: image("portfolio-banteng"),
       title: "Project Banteng",
       category: "Neon Box",
       tag: "Outdoor Sign",
       alt: "Konstruksi Neon Box dan Signage Komersial Project Banteng Jabodetabek",
     },
     {
-      src: "/images/carwashgogo.jpg",
+      src: image("portfolio-carwashgogo"),
       title: "Carwash Gogo",
       category: "Neon Box",
       tag: "Acrylic LED",
       alt: "Pembuatan Neon Box LED dan Fascia Carwash Gogo oleh NJM Advertising",
     },
     {
-      src: "/images/centralindonusamedika.jpg",
+      src: image("portfolio-centralindomedika"),
       title: "Central Indo Medika",
       category: "Huruf Timbul",
       tag: "Klinik Medis",
       alt: "Huruf Timbul Stainless Backlight Central Indo Medika",
     },
     {
-      src: "/images/citrasehatreflexology.jpg",
+      src: image("portfolio-citrasehat"),
       title: "Citra Sehat",
       category: "Komersial",
       tag: "Signage Outdoor",
       alt: "Signage Outdoor Neon Box Citra Sehat Reflexology",
     },
     {
-      src: "/images/lumiclinic.jpg",
+      src: image("portfolio-lumiclinic"),
       title: "Lumi Clinic",
       category: "Huruf Timbul",
       tag: "Akrilik Presisi",
       alt: "Huruf Timbul Akrilik LED Lumi Clinic oleh NJM Advertising",
     },
     {
-      src: "/images/manleyburgerax.jpg",
+      src: image("portfolio-manleyburger"),
       title: "Manley Burger",
       category: "Neon Box",
       tag: "Resto & F&B",
       alt: "Neon Box Restoran Manley Burger dengan Pencahayaan Merata",
     },
     {
-      src: "/images/olsedonut.jpg",
+      src: image("portfolio-olsedonut"),
       title: "Olse Donut",
       category: "Huruf Timbul",
       tag: "Neon Sign & Toko",
       alt: "Signage Toko Donut Olse Donut Huruf Timbul LED",
     },
     {
-      src: "/images/padel.jpg",
+      src: image("portfolio-padel"),
       title: "Padel Court",
       category: "Komersial",
       tag: "Pylon & Lapangan",
       alt: "Signage Outdoor Lapangan Olahraga Padel Court Jabodetabek",
     },
     {
-      src: "/images/pesonamobil.jpg",
+      src: image("portfolio-pesonamobil"),
       title: "Pesona Mobil",
       category: "Neon Box",
       tag: "Showroom Otomotif",
       alt: "Pylon Sign dan Plang Nama Showroom Pesona Mobil",
     },
     {
-      src: "/images/PTDIAN.jpg",
+      src: image("portfolio-ptdian"),
       title: "PT Dian Project",
       category: "Komersial",
       tag: "Signage Kantor",
       alt: "Huruf Timbul Kantor PT Dian Project oleh Workshop NJM",
+    },
+    {
+      src: image("portfolio-purisafana"),
+      title: "Puri Safana Cikeas",
+      category: "Huruf Timbul",
+      tag: "Huruf Timbul LED",
+      alt: "Huruf Timbul LED Menyala Puri Safana Cikeas Gunung Putri Bogor oleh NJM Advertising",
+    },
+    {
+      src: image("portfolio-ribens"),
+      title: "Ribens Sports",
+      category: "Huruf Timbul",
+      tag: "Sport Center",
+      alt: "Huruf Timbul Akrilik Logo Ribens Sports Padel Badminton Pickleball",
+    },
+    {
+      src: image("portfolio-seastar"),
+      title: "Seastar Resto",
+      category: "Huruf Timbul",
+      tag: "Acrylic LED Resto",
+      alt: "Huruf Timbul Acrylic LED Seastar Resto Hasil Fabrikasi Workshop NJM",
     },
   ];
 
@@ -351,15 +378,15 @@ export default function Home() {
   const [currentOwnerIndex, setCurrentOwnerIndex] = useState(0);
   const ownerImages = [
     {
-      src: "/images/owner.jpg",
+      src: image("owner-1"),
       alt: "Niko Christian Founder NJM Advertising di Workshop Fabrikasi",
     },
     {
-      src: "/images/owner12.jpg",
+      src: image("owner-2"),
       alt: "Niko Christian Memantau Kualitas Pembuatan Huruf Timbul",
     },
     {
-      src: "/images/owner2.jpg",
+      src: image("owner-3"),
       alt: "Niko Christian Pemilik Workshop NJM Advertising Jabodetabek",
     },
   ];
@@ -514,6 +541,7 @@ export default function Home() {
                 >
                   <Image
                     src={item.src}
+                    unoptimized={!isOptimizable(item.src)}
                     alt={item.alt}
                     fill
                     className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
@@ -873,7 +901,9 @@ export default function Home() {
                     : "bg-white text-slate-700 hover:bg-slate-200/70 border border-slate-200"
                 }`}
               >
-                {cat === "Semua" ? "Semua Project (12)" : cat}
+                {cat === "Semua"
+                  ? `Semua Project (${portfolioItems.length})`
+                  : cat}
               </button>
             ))}
           </div>
@@ -890,6 +920,7 @@ export default function Home() {
               >
                 <Image
                   src={item.src}
+                    unoptimized={!isOptimizable(item.src)}
                   alt={item.alt}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -957,6 +988,9 @@ export default function Home() {
                 <div className="relative w-full h-[55vh] sm:h-[65vh] bg-black flex items-center justify-center overflow-hidden">
                   <Image
                     src={filteredPortfolio[lightboxIndex].src}
+                    unoptimized={
+                      !isOptimizable(filteredPortfolio[lightboxIndex].src)
+                    }
                     alt={filteredPortfolio[lightboxIndex].alt}
                     fill
                     className="object-contain transition-all duration-300"
@@ -1245,7 +1279,8 @@ export default function Home() {
               className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white text-red-700 hover:bg-red-50 px-8 py-4 rounded-full font-bold text-base md:text-lg shadow-2xl transition-all hover:-translate-y-1 hover:shadow-white/20"
             >
               <Image
-                src="/images/logowa2.png"
+                src={waIcon}
+                unoptimized={!isOptimizable(waIcon)}
                 alt="Logo WhatsApp NJM Advertising"
                 width={26}
                 height={26}
@@ -1274,7 +1309,8 @@ export default function Home() {
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-6">
               <Image
-                src="/images/logonjm.svg"
+                src={image("brand-logo")}
+                unoptimized={!isOptimizable(image("brand-logo"))}
                 alt="Logo PT Naga Jaya Mandiri Advertising & Welding"
                 width={280}
                 height={80}
@@ -1307,7 +1343,8 @@ export default function Home() {
                 className="bg-slate-900 hover:bg-red-600 text-slate-300 hover:text-white p-3 rounded-full transition-colors border border-slate-800"
               >
                 <Image
-                  src="/images/logowa2.png"
+                  src={waIcon}
+                unoptimized={!isOptimizable(waIcon)}
                   alt="WhatsApp Logo"
                   width={20}
                   height={20}
@@ -1389,7 +1426,8 @@ export default function Home() {
               </div>
               <div className="flex items-center gap-3">
                 <Image
-                  src="/images/logowa2.png"
+                  src={waIcon}
+                unoptimized={!isOptimizable(waIcon)}
                   alt="WhatsApp Icon"
                   width={18}
                   height={18}
@@ -1451,7 +1489,8 @@ export default function Home() {
           </span>
 
           <Image
-            src="/images/logowa2.png"
+            src={waIcon}
+                unoptimized={!isOptimizable(waIcon)}
             alt="WhatsApp Logo"
             width={32}
             height={32}

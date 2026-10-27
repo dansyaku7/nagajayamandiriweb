@@ -6,35 +6,38 @@ import Image from "next/image";
 import { Phone, ArrowRight, Instagram } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { trackWhatsAppClick } from "@/lib/analytics";
+import { useSiteImage } from "@/components/SiteImages";
+import { isOptimizable, type SlotId } from "@/config/images";
 
-const heroSlides = [
+// Foto tiap slide bisa diganti dari panel admin (tab Foto, grup Hero).
+const heroSlides: { slot: SlotId; alt: string; label: string }[] = [
   {
-    src: "/images/ballroom2.jpg",
+    slot: "hero-1",
     alt: "Portofolio Signage Ballroom dan Huruf Timbul Elegan oleh NJM Advertising Jakarta",
     label: "Ballroom Signage & Huruf Timbul",
   },
   {
-    src: "/images/carwashgogo.jpg",
+    slot: "hero-2",
     alt: "Neon Box LED dan Fasad Usaha Carwash Gogo Jabodetabek - NJM Advertising",
     label: "Neon Box Fasad Toko",
   },
   {
-    src: "/images/royalurban.jpg",
+    slot: "hero-3",
     alt: "Pylon Sign dan Plang Nama Usaha Royal Urban oleh NJM Advertising",
     label: "Pylon Sign & Branding Komersial",
   },
   {
-    src: "/images/security.jpg",
+    slot: "hero-4",
     alt: "Pemasangan Signage Pos Security dan Reklame Gedung oleh Kontraktor NJM",
     label: "Signage Gedung & Keamanan",
   },
   {
-    src: "/images/padel.jpg",
+    slot: "hero-5",
     alt: "Signage Outdoor Lapangan Padel Court Tahan Cuaca oleh NJM Advertising",
     label: "Signage Outdoor & Komersial",
   },
   {
-    src: "/images/olsedonut.jpg",
+    slot: "hero-6",
     alt: "Neon Sign Custom dan Huruf Timbul Akrilik Toko Olse Donut NJM",
     label: "Neon Sign Cafe & Toko Ritel",
   },
@@ -42,6 +45,7 @@ const heroSlides = [
 
 export default function Hero() {
   const [currentImage, setCurrentImage] = useState(0);
+  const image = useSiteImage();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -56,15 +60,16 @@ export default function Hero() {
       <div className="absolute inset-0 w-full h-full">
         {heroSlides.map((slide, index) => (
           <div
-            key={slide.src}
+            key={slide.slot}
             className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
               index === currentImage ? "opacity-100 z-0" : "opacity-0 -z-10"
             }`}
           >
             <Image
-              src={slide.src}
+              src={image(slide.slot)}
               alt={slide.alt}
               fill
+              unoptimized={!isOptimizable(image(slide.slot))}
               className="object-cover object-center scale-105 transition-transform duration-10000 ease-linear"
               priority={index === 0}
               sizes="100vw"
@@ -163,7 +168,7 @@ export default function Hero() {
           >
             {heroSlides.map((slide, idx) => (
               <button
-                key={slide.src}
+                key={slide.slot}
                 type="button"
                 onClick={() => setCurrentImage(idx)}
                 className={`transition-all duration-300 rounded-full ${

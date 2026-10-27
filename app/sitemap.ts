@@ -1,51 +1,22 @@
 import { MetadataRoute } from "next";
-import { siteConfig } from "@/config/site";
+import { getSeo } from "@/lib/server/store";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = siteConfig.url || "https://nagajayamandiri.com";
+/**
+ * Situs ini satu halaman. Alamat dengan #anchor tidak dianggap halaman terpisah oleh Google,
+ * jadi sitemap cukup berisi beranda.
+ */
+export const revalidate = 3600;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const seo = await getSeo();
+  const updated = seo.updatedAt > new Date(0).toISOString() ? new Date(seo.updatedAt) : new Date();
 
   return [
     {
-      url: baseUrl,
-      lastModified: new Date(),
+      url: `${seo.siteUrl}/`,
+      lastModified: updated,
       changeFrequency: "weekly",
       priority: 1.0,
-    },
-    {
-      url: `${baseUrl}/#services`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/#portfolio`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/#pricing`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#about`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/#faq`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#cta`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
     },
   ];
 }

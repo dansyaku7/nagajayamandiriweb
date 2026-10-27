@@ -1,8 +1,15 @@
 import { MetadataRoute } from "next";
-import { siteConfig } from "@/config/site";
+import { getSeo } from "@/lib/server/store";
 
-export default function robots(): MetadataRoute.Robots {
-  const baseUrl = siteConfig.url || "https://nagajayamandiri.com";
+export const revalidate = 3600;
+
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const seo = await getSeo();
+
+  // Saat izin indeks dimatikan dari panel SEO, seluruh situs ditutup untuk mesin pencari.
+  if (!seo.robotsIndex) {
+    return { rules: { userAgent: "*", disallow: "/" } };
+  }
 
   return {
     rules: {
@@ -10,6 +17,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/"],
     },
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: `${seo.siteUrl}/sitemap.xml`,
   };
 }

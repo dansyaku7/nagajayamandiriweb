@@ -14,10 +14,13 @@ import {
 } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { trackWhatsAppClick } from "@/lib/analytics";
+import { useSiteImage } from "@/components/SiteImages";
+import { isOptimizable } from "@/config/images";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
+  const logo = useSiteImage()("brand-logo");
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -75,7 +78,8 @@ export default function Navbar() {
             aria-label="Kembali ke Beranda NJM Advertising"
           >
             <Image
-              src="/images/logonjm.svg"
+              src={logo}
+              unoptimized={!isOptimizable(logo)}
               alt="Logo Naga Jaya Mandiri Advertising - Spesialis Signage & Neon Box"
               width={260}
               height={70}
