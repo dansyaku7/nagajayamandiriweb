@@ -19,12 +19,6 @@ export function Tracker() {
     let reportedMs = 0;
     const total = () => visibleMs + (visibleSince ? Date.now() - visibleSince : 0);
 
-    const engagedCheck = setInterval(() => {
-      if (total() < ENGAGED_AFTER_MS) return;
-      trackEngaged();
-      clearInterval(engagedCheck);
-    }, 1000);
-
     const report = () => {
       const seconds = Math.floor((total() - reportedMs) / 1000);
       if (seconds > 0) {
@@ -33,6 +27,23 @@ export function Tracker() {
       }
       flush();
     };
+
+    // Kiriman saat halaman ditutup kadang hilang, jadi lama dilihat juga dilaporkan bertahap
+    // (detik ke-15, 30, 60, ...). Kunjungan panjang tetap hanya memicu beberapa kiriman.
+    const checkpoints = [15, 30, 60, 120, 240, 480, 900].map((s) => s * 1000);
+    let engaged = false;
+    const ticker = setInterval(() => {
+      const ms = total();
+      if (!engaged && ms >= ENGAGED_AFTER_MS) {
+        engaged = true;
+        trackEngaged();
+      }
+      if (checkpoints.length && ms >= checkpoints[0]) {
+        while (checkpoints.length && ms >= checkpoints[0]) checkpoints.shift();
+        report();
+      }
+      if (engaged && !checkpoints.length) clearInterval(ticker);
+    }, 1000);
 
     const onVisibility = () => {
       if (document.visibilityState === "hidden") {
@@ -65,7 +76,7 @@ export function Tracker() {
     }
 
     return () => {
-      clearInterval(engagedCheck);
+      clearInterval(ticker);
       document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("pagehide", report);
       observer.disconnect();
